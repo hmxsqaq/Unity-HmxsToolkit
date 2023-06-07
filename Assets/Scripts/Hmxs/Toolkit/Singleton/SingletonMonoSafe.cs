@@ -32,7 +32,7 @@ namespace Hmxs.Toolkit.Singleton
 
         protected virtual void OnInstanceCreate() { }
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             if(_instance != null) Destroy(gameObject);
         }
