@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test2.unity
     guid: 47ae276c33f269040ae0b2bcb4851dfc
+  - enabled: 1
+    path: Assets/Scenes/Fungus.unity
+    guid: 4baf9b49819022e4082cffc57ebef0c9
   m_configObjects: {}

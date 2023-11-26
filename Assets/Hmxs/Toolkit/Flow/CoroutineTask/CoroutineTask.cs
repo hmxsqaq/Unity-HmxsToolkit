@@ -2,13 +2,13 @@
 using System.Collections;
 using Hmxs.Toolkit.Base.Singleton;
 
-namespace Hmxs.Toolkit.Flow.Task
+namespace Hmxs.Toolkit.Flow.CoroutineTask
 {
     /// <summary>
     /// 协程控制器
     /// 通过CallWrapper()对协程函数进行包裹，使用迭代器的性质控制协程的运行
     /// </summary>
-    public class Task
+    public class CoroutineTask
     {
         #region Public Properties/Fields
 
@@ -47,7 +47,7 @@ namespace Hmxs.Toolkit.Flow.Task
         /// </summary>
         /// <param name="enumerator">返回值为IEnumerator的函数</param>
         /// <param name="callback">协程结束回调</param>
-        public Task(IEnumerator enumerator, Action<bool> callback = null)
+        public CoroutineTask(IEnumerator enumerator, Action<bool> callback = null)
         {
             Enumerator = enumerator;
             if (callback != null) OnComplete += callback;
@@ -60,7 +60,7 @@ namespace Hmxs.Toolkit.Flow.Task
         {
             if (Enumerator == null) return;
             IsRunning = true;
-            TaskManager.Instance.StartTask(CallWrapper());
+            CoroutineTaskManager.Instance.StartTask(CallWrapper());
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Hmxs.Toolkit.Flow.Task
             Finish();
         }
         
-        private class TaskManager : SingletonMono<TaskManager>
+        internal class CoroutineTaskManager : SingletonMono<CoroutineTaskManager>
         {
             public void StartTask(IEnumerator enumerator) => StartCoroutine(enumerator);
         }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 
-namespace Hmxs.Toolkit.Flow.Task
+namespace Hmxs.Toolkit.Flow.CoroutineTask
 {
-    public static class TaskExtension
+    public static class CoroutineTaskExtension
     {
         #region Extension Method
         
@@ -13,9 +13,9 @@ namespace Hmxs.Toolkit.Flow.Task
         /// <param name="enumerator">返回值为IEnumerator的函数</param>
         /// <param name="callback">协程结束回调</param>
         /// <returns>Task</returns>
-        public static Task StartAsTask(this IEnumerator enumerator, Action<bool> callback = null)
+        public static CoroutineTask StartAsTask(this IEnumerator enumerator, Action<bool> callback = null)
         {
-            var task = new Task(enumerator);
+            var task = new Flow.CoroutineTask.CoroutineTask(enumerator);
             if (callback != null) task.OnComplete += callback;
             task.Start();
             return task;

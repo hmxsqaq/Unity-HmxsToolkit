@@ -160,7 +160,7 @@ namespace Hmxs.Toolkit.Flow.Timer
         }
 
         /// <summary>
-        /// 接触计时器暂停状态(若计时器为null会报错)
+        /// 解除计时器暂停状态(若计时器为null会报错)
         /// </summary>
         public void UnPause()
         {
@@ -239,7 +239,7 @@ namespace Hmxs.Toolkit.Flow.Timer
 
         #region Private Class
         
-        // 私有Mono类，负责管理、更新所有Timer的状态
+        // 私有Mono单例类，负责管理、更新所有Timer的状态
         private class TimerManager : SingletonMono<TimerManager>
         {
             [SerializeField] [ReadOnly] private List<Timer> timers = new();
@@ -271,7 +271,8 @@ namespace Hmxs.Toolkit.Flow.Timer
             public List<Timer> Get(string id)
             {
                 var timer = timers.FindAll(timer => timer.Id == id);
-                if (timers != null) return timer;
+                if (timers != null) 
+                    return timer;
                 Debug.LogError($"TimerManager: Can't find a timer with ID:'{id}'");
                 return null;
             }
@@ -279,7 +280,7 @@ namespace Hmxs.Toolkit.Flow.Timer
             public void ClearAll()
             {
                 foreach (var timer in timers) 
-                    timer.Remove();
+                    timer?.Remove();
                 timers.Clear();
                 timersBuffer.Clear();
             }
