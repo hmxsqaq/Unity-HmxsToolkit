@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-
-namespace Test
+﻿namespace Test
 {
-    public class Test1 : MonoBehaviour
+    public class Test1
     {
-        
+
     }
 }

@@ -4,7 +4,11 @@ using UnityEngine.Pool;
 
 namespace Hmxs.Toolkit.Base.Pools
 {
-    public abstract class SingletonPool<T> : SingletonMono<SingletonPool<T>>, IPool<T> where T : class
+    /// <summary>
+    /// 基于Unity自带对象池的Mono单例对象池抽象基类，继承并实现对应方法即可使用
+    /// </summary>
+    /// <typeparam name="T">对象池中存储的物体</typeparam>
+    public abstract class SingletonMonoPool<T> : SingletonMono<SingletonMonoPool<T>>, IPool<T> where T : class
     {
         [SerializeField] private int defaultSize = 100;
         [SerializeField] private int maxSize = 500;
@@ -19,12 +23,10 @@ namespace Hmxs.Toolkit.Base.Pools
         public void Dispose() => Pool.Clear();
 
         private ObjectPool<T> _pool;
-        private ObjectPool<T> Pool => _pool ?? Initialize();
+        protected ObjectPool<T> Pool => _pool ?? Initialize();
 
         private ObjectPool<T> Initialize() =>
             new(OnCreateElement, OnGetElement, OnReleaseElement, OnDestroyElement, collectionCheck, defaultSize, maxSize);
-
-        protected override void OnInstanceCreate(SingletonPool<T> instance) { }
 
         protected abstract T OnCreateElement();
         protected abstract void OnGetElement(T element);

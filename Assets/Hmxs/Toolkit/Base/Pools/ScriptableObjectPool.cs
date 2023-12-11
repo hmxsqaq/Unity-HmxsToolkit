@@ -3,6 +3,10 @@ using UnityEngine.Pool;
 
 namespace Hmxs.Toolkit.Base.Pools
 {
+    /// <summary>
+    /// 基于Unity自带对象池的SO对象池抽象基类，继承并实现对应方法即可使用
+    /// </summary>
+    /// <typeparam name="T">对象池中存储的物体</typeparam>
     public abstract class ScriptableObjectPool<T> : ScriptableObject, IPool<T> where T : class
     {
         [SerializeField] private int defaultSize = 100;
@@ -18,7 +22,7 @@ namespace Hmxs.Toolkit.Base.Pools
         public void Dispose() => Pool.Clear();
 
         private ObjectPool<T> _pool;
-        private ObjectPool<T> Pool => _pool ?? Initialize();
+        protected ObjectPool<T> Pool => _pool ?? Initialize();
 
         private ObjectPool<T> Initialize() =>
             new(OnCreateElement, OnGetElement, OnReleaseElement, OnDestroyElement, collectionCheck, defaultSize, maxSize);

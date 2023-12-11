@@ -1,7 +1,6 @@
-﻿using Hmxs.Toolkit.Module.Quests.Model;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Hmxs.Toolkit.Module.Quests.View
+namespace Quests
 {
     public class QuestIcon : MonoBehaviour
     {

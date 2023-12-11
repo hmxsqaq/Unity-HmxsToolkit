@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hmxs.Toolkit.Module.Quests.Model
+namespace Quests
 {
     /// <summary>
     /// Quest对象数据SO,将QuestInfo创建于Resources/Quests文件夹中,Quest会自动进行读取并实例化对应Quest类

@@ -16,25 +16,14 @@ namespace Hmxs.Toolkit.Base.Singleton
             get
             {
                 _instance ??= new Lazy<GameObject>(new GameObject(typeof(T).Name)).Value.AddComponent<T>();
-                _instance.OnInstanceCreate(_instance);
                 return _instance;
             }
-        }
-
-        /// <summary>
-        /// 单例被第一次调用时调用该方法
-        /// </summary>
-        protected virtual void OnInstanceCreate(T instance)
-        {
-            DontDestroyOnLoad(gameObject);
         }
 
         protected virtual void Awake()
         {
             if (_instance == null)
                 _instance = (T)this;
-            else 
-                Destroy(gameObject);
         }
     }
 }

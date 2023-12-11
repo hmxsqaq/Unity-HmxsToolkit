@@ -1,8 +1,7 @@
 ﻿using Hmxs.Toolkit.Module.Events;
-using Hmxs.Toolkit.Module.Quests.Model;
 using UnityEngine;
 
-namespace Hmxs.Toolkit.Module.Quests.View
+namespace Quests
 {
     /// <summary>
     /// 挂载在任务的起点/终点,通过Collider进行检测
@@ -30,14 +29,14 @@ namespace Hmxs.Toolkit.Module.Quests.View
 
         private void OnEnable()
         {
-            Events.Events.AddListener<Quest>(EventGroups.Quests.QuestStateChange, OnQuestStateChange);
-            Events.Events.AddListener(EventGroups.Player.SubmitPressed, OnSubmitPressed);
+            Events.AddListener<Quest>(EventGroups.Quests.QuestStateChange, OnQuestStateChange);
+            Events.AddListener(EventGroups.Player.SubmitPressed, OnSubmitPressed);
         }
 
         private void OnDisable()
         {
-            Events.Events.RemoveListener<Quest>(EventGroups.Quests.QuestStateChange, OnQuestStateChange);
-            Events.Events.RemoveListener(EventGroups.Player.SubmitPressed, OnSubmitPressed);
+            Events.RemoveListener<Quest>(EventGroups.Quests.QuestStateChange, OnQuestStateChange);
+            Events.RemoveListener(EventGroups.Player.SubmitPressed, OnSubmitPressed);
         }
         
         /// <summary>
@@ -63,11 +62,11 @@ namespace Hmxs.Toolkit.Module.Quests.View
             {
                 case QuestState.CanStart:
                     if (isStartPoint) 
-                        Events.Events.Trigger<string>(EventGroups.Quests.QuestStart, _questId);
+                        Events.Trigger<string>(EventGroups.Quests.QuestStart, _questId);
                     break;
                 case QuestState.CanFinish:
                     if (isFinishPoint) 
-                        Events.Events.Trigger<string>(EventGroups.Quests.QuestFinish, _questId);
+                        Events.Trigger<string>(EventGroups.Quests.QuestFinish, _questId);
                     break;
             }
         }

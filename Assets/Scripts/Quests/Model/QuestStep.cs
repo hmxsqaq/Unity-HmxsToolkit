@@ -1,7 +1,7 @@
 ﻿using Hmxs.Toolkit.Module.Events;
 using UnityEngine;
 
-namespace Hmxs.Toolkit.Module.Quests.Model
+namespace Quests
 {
     /// <summary>
     /// QuestStep抽象类,每个Step类继承此类,在Step中实现判断逻辑
@@ -27,7 +27,7 @@ namespace Hmxs.Toolkit.Module.Quests.Model
         {
             if (_isFinished) return;
             _isFinished = true;
-            Events.Events.Trigger(EventGroups.Quests.QuestAdvance, _questId);
+            Events.Trigger(EventGroups.Quests.QuestAdvance, _questId);
             Destroy(gameObject);
         }
 

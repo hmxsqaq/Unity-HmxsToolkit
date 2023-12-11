@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Hmxs.Toolkit.Module.Events;
-using Hmxs.Toolkit.Module.Quests.Model;
 using UnityEngine;
 
-namespace Hmxs.Toolkit.Module.Quests.Controller
+namespace Quests
 {
     /// <summary>
     /// 所有Quest的管理器,维护一个包含所有Quest的Dictionary,key为QuestID
@@ -19,18 +18,18 @@ namespace Hmxs.Toolkit.Module.Quests.Controller
         #region Events Subscribe
         private void OnEnable()
         {
-            Events.Events.AddListener<string>(EventGroups.Quests.QuestStart, OnQuestStart);
-            Events.Events.AddListener<string>(EventGroups.Quests.QuestAdvance, OnQuestAdvance);
-            Events.Events.AddListener<string>(EventGroups.Quests.QuestFinish, OnQuestFinish);
-            Events.Events.AddListener<string, int, QuestStepData>(EventGroups.Quests.QuestStepDataUpdate, OnStepDataUpdate);
+            Events.AddListener<string>(EventGroups.Quests.QuestStart, OnQuestStart);
+            Events.AddListener<string>(EventGroups.Quests.QuestAdvance, OnQuestAdvance);
+            Events.AddListener<string>(EventGroups.Quests.QuestFinish, OnQuestFinish);
+            Events.AddListener<string, int, QuestStepData>(EventGroups.Quests.QuestStepDataUpdate, OnStepDataUpdate);
         }
 
         private void OnDisable()
         {
-            Events.Events.RemoveListener<string>(EventGroups.Quests.QuestStart, OnQuestStart);
-            Events.Events.RemoveListener<string>(EventGroups.Quests.QuestAdvance, OnQuestAdvance);
-            Events.Events.RemoveListener<string>(EventGroups.Quests.QuestFinish, OnQuestFinish);
-            Events.Events.RemoveListener<string, int, QuestStepData>(EventGroups.Quests.QuestStepDataUpdate, OnStepDataUpdate);
+            Events.RemoveListener<string>(EventGroups.Quests.QuestStart, OnQuestStart);
+            Events.RemoveListener<string>(EventGroups.Quests.QuestAdvance, OnQuestAdvance);
+            Events.RemoveListener<string>(EventGroups.Quests.QuestFinish, OnQuestFinish);
+            Events.RemoveListener<string, int, QuestStepData>(EventGroups.Quests.QuestStepDataUpdate, OnStepDataUpdate);
         }
         #endregion
         
@@ -46,7 +45,7 @@ namespace Hmxs.Toolkit.Module.Quests.Controller
             {
                 if (quest.State == QuestState.InProgress) 
                     quest.InstantiateCurrentStepPrefab(transform);
-                Events.Events.Trigger(EventGroups.Quests.QuestStateChange, quest);
+                Events.Trigger(EventGroups.Quests.QuestStateChange, quest);
             }
             // 开始运行时先检查一次
             CheckAllQuestsRequirements();
@@ -84,7 +83,7 @@ namespace Hmxs.Toolkit.Module.Quests.Controller
         {
             var quest = GetQuestById(id);
             quest.State = state;
-            Events.Events.Trigger(EventGroups.Quests.QuestStateChange, quest);
+            Events.Trigger(EventGroups.Quests.QuestStateChange, quest);
         }
         
         /// <summary>

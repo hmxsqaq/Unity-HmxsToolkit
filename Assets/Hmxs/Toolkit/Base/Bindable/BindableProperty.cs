@@ -1,7 +1,9 @@
 ﻿using System;
+using UnityEngine.Events;
 
 namespace Hmxs.Toolkit.Base.Bindable
 {
+    [Serializable]
     public struct BindableProperty<T> where T : IEquatable<T>
     {
         private T _value;
@@ -13,10 +15,16 @@ namespace Hmxs.Toolkit.Base.Bindable
             {
                 if(_value.Equals(value)) return;
                 _value = value;
-                OnValueChanged?.Invoke(_value);
+                onValueChanged?.Invoke(_value);
             }
         }
 
-        public Action<T> OnValueChanged;
+        public UnityEvent<T> onValueChanged;
+
+        public BindableProperty(T initValue = default, UnityEvent<T> valueChangedCallBack = default)
+        {
+            _value = initValue;
+            onValueChanged = valueChangedCallBack;
+        }
     }
 }

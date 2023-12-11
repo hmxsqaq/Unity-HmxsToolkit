@@ -1,4 +1,4 @@
-﻿namespace Hmxs.Toolkit.Module.Quests.Model
+﻿namespace Quests
 {
     /// <summary>
     /// Quest状态枚举

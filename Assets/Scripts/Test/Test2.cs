@@ -1,10 +1,8 @@
-﻿using Hmxs.Toolkit.Base.Singleton;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Test
 {
-    public class Test2
+    public class Test2 : MonoBehaviour
     {
-        
     }
 }

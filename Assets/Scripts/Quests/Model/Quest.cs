@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hmxs.Toolkit.Module.Quests.Model
+namespace Quests
 {
     /// <summary>
     /// 代表一个Quest对象,由Manager依据QuestInfo进行实例化

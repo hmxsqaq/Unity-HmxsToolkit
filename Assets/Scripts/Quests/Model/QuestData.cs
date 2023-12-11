@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hmxs.Toolkit.Module.Quests.Model
+namespace Quests
 {
     /// <summary>
     /// 用于数据持久化
