@@ -232,7 +232,7 @@ namespace Fungus.EditorUtils
             get
             {
                 if(toolbarSeachTextFieldStyle == null)
-                    toolbarSeachTextFieldStyle = GUI.skin.FindStyle("ToolbarSeachTextField");
+                    toolbarSeachTextFieldStyle = EditorStyles.toolbarSearchField;
 
                 return toolbarSeachTextFieldStyle;
             }
@@ -244,9 +244,14 @@ namespace Fungus.EditorUtils
         {
             get
             {
-                if(toolbarSeachCancelButtonStyle == null)
+                if (GUI.skin.FindStyle("ToolbarSeachCancelButton") == null)
+                {
+                    toolbarSeachCancelButtonStyle = GUI.skin.FindStyle("ToolbarSearchCancelButton");
+                }
+                else
+                {
                     toolbarSeachCancelButtonStyle = GUI.skin.FindStyle("ToolbarSeachCancelButton");
-
+                }
                 return toolbarSeachCancelButtonStyle;
             }
         }
@@ -821,6 +826,7 @@ namespace Fungus.EditorUtils
             catch (Exception)
             {
                 //Debug.Log("Failed to draw overlay in some way");
+                GUIUtility.ExitGUI();
             }
 
             // Handle events for custom GUI
@@ -832,10 +838,10 @@ namespace Fungus.EditorUtils
                 Repaint();
             }
 
-#if UNITY_2020_1_OR_NEWER
-            //Force exit gui once repainted
-            GUIUtility.ExitGUI();
-#endif
+//#if UNITY_2020_1_OR_NEWER
+//            //Force exit gui once repainted
+//            GUIUtility.ExitGUI();
+//#endif
         }
 
         protected virtual void DrawOverlay(Event e)
@@ -2126,7 +2132,8 @@ namespace Fungus.EditorUtils
                 {
                     GUI.backgroundColor = Color.white;
                     nodeStyle.normal.background = graphics.onTexture;
-                    GUI.Box(windowRelativeRect, "", nodeStyle);
+                    //GUI.Box(windowRelativeRect, "", nodeStyle);
+                    GUI.Label(windowRelativeRect, "", nodeStyle);
                     nodeStyle.normal.background = tmpNormBg;
                 }
 
@@ -2137,7 +2144,8 @@ namespace Fungus.EditorUtils
                     var c = GUI.backgroundColor;
                     c.a = 0.5f;
                     GUI.backgroundColor = c;
-                    GUI.Box(windowRelativeRect, "", nodeStyle);
+                    //GUI.Box(windowRelativeRect, "", nodeStyle);
+                    GUI.Label(windowRelativeRect, "", nodeStyle);
                     nodeStyle.normal.background = tmpNormBg;
                 }
 
@@ -2162,7 +2170,8 @@ namespace Fungus.EditorUtils
 
                 nodeStyle.normal.background = graphics.offTexture;
                 GUI.backgroundColor = graphics.tint;
-                GUI.Box(windowRelativeRect, block.BlockName, nodeStyle);
+                //GUI.Box(windowRelativeRect, block.BlockName, nodeStyle);
+                GUI.Label(windowRelativeRect, block.BlockName, nodeStyle);
 
                 GUI.backgroundColor = Color.white;
 

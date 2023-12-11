@@ -13,7 +13,7 @@ namespace Fungus.EditorUtils
     [CustomPropertyDrawer(typeof(Fungus.VariableReference))]
     public class VariableReferenceDrawer : PropertyDrawer
     {
-        public Fungus.Flowchart lastFlowchart;
+        //public Fungus.Flowchart lastFlowchart;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -22,35 +22,35 @@ namespace Fungus.EditorUtils
             position = EditorGUI.PrefixLabel(position, l);
             position.height = EditorGUIUtility.singleLineHeight;
             var variable = property.FindPropertyRelative("variable");
+            var flowchartProp = property.FindPropertyRelative("flowchart");
 
             Fungus.Variable v = variable.objectReferenceValue as Fungus.Variable;
+            Fungus.Flowchart lastFlowchart = flowchartProp.objectReferenceValue as Fungus.Flowchart;
 
-            if (variable.objectReferenceValue != null && lastFlowchart == null)
-            {
-                if (v != null)
-                {
-                    lastFlowchart = v.GetComponent<Flowchart>();
-                }
-            }
 
-            lastFlowchart = EditorGUI.ObjectField(position, lastFlowchart, typeof(Fungus.Flowchart), true) as Fungus.Flowchart;
+
+            EditorGUI.PropertyField(position, flowchartProp, GUIContent.none);
             position.y += EditorGUIUtility.singleLineHeight;
             if (lastFlowchart != null)
             {
-                var ourPos = startPos;
-                ourPos.y = position.y;
-                var prefixLabel = new GUIContent(v != null ? v.GetType().Name : "No Var Selected");
-                EditorGUI.indentLevel++;
-                VariableEditor.VariableField(variable,
-                                             prefixLabel,
-                                             lastFlowchart,
-                                             "<None>",
-                                             null,
-                                             //lable, index, elements
-                                             (s, t, u) => (EditorGUI.Popup(ourPos, s, t, u)));
+                if (!property.serializedObject.isEditingMultipleObjects)
+                {
+                    var ourPos = startPos;
+                    ourPos.y = position.y;
+                    ourPos.yMax -= EditorGUIUtility.singleLineHeight;//有待.
+                    var prefixLabel = new GUIContent(v != null ? v.GetType().Name : "No Var Selected");
+                    EditorGUI.indentLevel++;
+                    VariableEditor.VariableField(variable,
+                                                 prefixLabel,
+                                                 lastFlowchart,
+                                                 "<None>",
+                                                 null,
+                                                 //lable, index, elements
+                                                 (s, t, u) => (EditorGUI.Popup(ourPos, s, t, u)));
 
 
-                EditorGUI.indentLevel--;
+                    EditorGUI.indentLevel--;
+                }
             }
             else
             {

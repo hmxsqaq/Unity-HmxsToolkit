@@ -199,12 +199,15 @@ namespace Fungus.EditorUtils
             GUI.DrawTexture(resizeRect, EditorGUIUtility.whiteTexture);
             GUI.color = Color.white;
 
-            Repaint();
+            if (EditorApplication.isPlaying || (resize && Event.current.type == EventType.MouseDown))
+            {
+                Repaint();
+            }
         }
 
         private void ResizeScrollView(Flowchart flowchart)
         {
-            Rect cursorChangeRect = new Rect(0, flowchart.BlockViewHeight + 1 + topPanelHeight, EditorGUIUtility.currentViewWidth, 4f);
+            Rect cursorChangeRect = new Rect(0, flowchart.BlockViewHeight + topPanelHeight, EditorGUIUtility.currentViewWidth, 8f);
 
             EditorGUIUtility.AddCursorRect(cursorChangeRect, MouseCursor.ResizeVertical);
             

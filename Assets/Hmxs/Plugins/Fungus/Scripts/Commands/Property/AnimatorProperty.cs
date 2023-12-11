@@ -191,8 +191,8 @@ namespace Fungus
                         case Property.FireEvents:
                             iob.Value = target.fireEvents;
                             break;
-#if UNITY_2019_2_OR_NEWER
-                case Property.KeepAnimatorControllerStateOnDisable:
+#if UNITY_2021_1_OR_NEWER
+                        case Property.KeepAnimatorControllerStateOnDisable:
                             iob.Value = target.keepAnimatorStateOnDisable;
                             break;
 #endif
@@ -247,7 +247,7 @@ namespace Fungus
                         case Property.FireEvents:
                             target.fireEvents = iob.Value;
                             break;
-#if UNITY_2019_2_OR_NEWER
+#if UNITY_2021_1_OR_NEWER
                         case Property.KeepAnimatorControllerStateOnDisable:
                             target.keepAnimatorStateOnDisable = iob.Value;
                             break;

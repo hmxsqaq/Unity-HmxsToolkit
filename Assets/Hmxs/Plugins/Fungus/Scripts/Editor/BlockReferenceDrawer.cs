@@ -15,7 +15,7 @@ namespace Fungus.EditorUtils
     [CustomPropertyDrawer(typeof(Fungus.BlockReference))]
     public class BlockReferenceDrawer : PropertyDrawer
     {
-        public Fungus.Flowchart lastFlowchart;
+        //public Fungus.Flowchart lastFlowchart;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -23,24 +23,20 @@ namespace Fungus.EditorUtils
             position = EditorGUI.PrefixLabel(position, l);
             position.height = EditorGUIUtility.singleLineHeight;
             var block = property.FindPropertyRelative("block");
+            var flowchartProp = property.FindPropertyRelative("flowchart");
 
             Fungus.Block b = block.objectReferenceValue as Fungus.Block;
+            Fungus.Flowchart lastFlowchart = flowchartProp.objectReferenceValue as Fungus.Flowchart;
 
-            if (block.objectReferenceValue != null && lastFlowchart == null)
-            {
-                if (b != null)
-                {
-                    lastFlowchart = b.GetFlowchart();
-                }
-            }
 
-            lastFlowchart = EditorGUI.ObjectField(position, lastFlowchart, typeof(Fungus.Flowchart), true) as Fungus.Flowchart;
+            EditorGUI.PropertyField(position, flowchartProp, GUIContent.none);
             position.y += EditorGUIUtility.singleLineHeight;
-            if (lastFlowchart != null)
+            if (flowchartProp.objectReferenceValue != null && !property.serializedObject.isEditingMultipleObjects)
                 b = Fungus.EditorUtils.BlockEditor.BlockField(position, new GUIContent("None"), lastFlowchart, b);
             else
                 EditorGUI.PrefixLabel(position, new GUIContent("Flowchart Required"));
 
+            if (!property.serializedObject.isEditingMultipleObjects)
             block.objectReferenceValue = b;
 
             block.serializedObject.ApplyModifiedProperties();

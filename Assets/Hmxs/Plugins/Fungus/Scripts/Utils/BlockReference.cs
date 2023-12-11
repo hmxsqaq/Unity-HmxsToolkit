@@ -19,6 +19,7 @@ namespace Fungus
     [System.Serializable]
     public struct BlockReference
     {
+        [SerializeField] Flowchart flowchart;
         public Block block;
 
         public void Execute()

@@ -151,6 +151,7 @@ namespace Fungus.EditorUtils
             }
             catch (Exception)
             {
+                GUIUtility.ExitGUI();
             }
         }
 

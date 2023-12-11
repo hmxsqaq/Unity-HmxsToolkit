@@ -1,6 +1,5 @@
 //#define PERFTEST        //For testing performance of parse/stringify.  Turn on editor profiling to see how we're doing
 
-using System;
 using UnityEngine;
 using UnityEditor;
 #if UNITY_2017_1_OR_NEWER
@@ -51,7 +50,6 @@ public class JSONChecker : EditorWindow {
 	static void Init() {
 		GetWindow(typeof(JSONChecker));
 	}
-	[Obsolete("Obsolete")]
 	void OnGUI() {
 		JSON = EditorGUILayout.TextArea(JSON);
 		GUI.enabled = !string.IsNullOrEmpty(JSON);

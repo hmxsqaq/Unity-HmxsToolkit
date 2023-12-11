@@ -1,9 +1,9 @@
 // This code is part of the Fungus library (https://github.com/snozbot/fungus)
 // It is released for free under the MIT open source license (https://github.com/snozbot/fungus/blob/master/LICENSE)
 
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.UI;
+ using UnityEngine.InputSystem.UI;
 
 namespace Fungus
 {
@@ -75,15 +75,14 @@ namespace Fungus
             {
                 // Auto spawn an Event System from the prefab
                 var prefab = Resources.Load<GameObject>("Prefabs/EventSystem");
-                if (prefab != null) 
-                { 
-                    Debug.Log(1); 
+                if (prefab != null)
+                {
                     GameObject go = Instantiate(prefab) as GameObject;
                     go.name = "EventSystem";
                 }
             }
         }
-            
+
         protected virtual void Update()
         {
             if (EventSystem.current == null)
@@ -112,7 +111,7 @@ namespace Fungus
             if (ignoreMenuClicks)
             {
                 // Ignore input events if a Menu is being displayed
-                if (MenuDialog.ActiveMenuDialog != null && 
+                if (MenuDialog.ActiveMenuDialog != null &&
                     MenuDialog.ActiveMenuDialog.IsActive() &&
                     MenuDialog.ActiveMenuDialog.DisplayedOptionsCount > 0)
                 {
@@ -136,14 +135,14 @@ namespace Fungus
 
         private void CheckInputMode()
         {
-            if (NewInputModule == null) 
+            if (NewInputModule == null)
                 NewInputModule = EventSystem.current.GetComponent<InputSystemUIInputModule>();
             if (NewInputModule != null)
             {
                 inputMode = InputMode.New;
                 return;
             }
-            if (OldInputModule == null) 
+            if (OldInputModule == null)
                 OldInputModule = EventSystem.current.GetComponent<StandaloneInputModule>();
             if (OldInputModule != null)
             {
@@ -160,7 +159,7 @@ namespace Fungus
                 OldInputModule = EventSystem.current.GetComponent<StandaloneInputModule>();
                 if (OldInputModule == null) Debug.LogError("Can't Find OldInputModule");
             }
-            
+
             if (Writer != null)
             {
                 if (Input.GetButtonDown(OldInputModule.submitButton) ||
@@ -206,7 +205,7 @@ namespace Fungus
                     SetNextLineFlag();
                 }
             }
-            
+
             switch (clickMode)
             {
                 case ClickMode.Disabled:

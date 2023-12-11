@@ -3,6 +3,19 @@ Changelog {#changelog}
 
 Unreleased
 ======
+v3.13.8 (bug修复版0.1)
+======
+
+## 已知问题
+ - 因为fungus使用的很多第三方插件已经过时, 也可能是因为fungus的FungusManager代码设计问题, 目前Fungus很多功能在快速模式下会报错或无效.
+
+## Fixed
+ - 修复了flowchart面板报错的问题.
+ - 修复了flowchart面板变量书写乱套的问题.
+ - 修复了VariableReference与BlockReference在集合中会造成强制引用相同的问题.
+ - 修复了VariableReference与BlockReference多选后,引用内容会改变的问题.
+ - 修复了各个演示场景的GUI报错问题.
+
 
 v3.13.8
 ======

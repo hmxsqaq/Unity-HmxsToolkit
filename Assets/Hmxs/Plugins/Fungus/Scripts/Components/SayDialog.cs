@@ -226,9 +226,10 @@ namespace Fungus
                 canvasGroup.alpha = alpha;
 
                 if (alpha <= 0f)
-                {                   
-                    // Deactivate dialog object once invisible
-                    gameObject.SetActive(false);
+                {
+                    if (Time.time != 0)
+                        // Deactivate dialog object once invisible
+                        gameObject.SetActive(false);
                 }
             }
         }
