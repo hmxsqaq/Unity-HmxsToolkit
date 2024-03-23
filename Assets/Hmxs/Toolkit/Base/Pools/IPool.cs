@@ -1,6 +1,4 @@
-﻿using UnityEngine.Pool;
-
-namespace Hmxs.Toolkit.Base.Pools
+﻿namespace Hmxs.Toolkit.Base.Pools
 {
     public interface IPool<T> where T : class
     {

@@ -1,6 +1,8 @@
-﻿namespace Test
+﻿using UnityEngine;
+
+namespace Test
 {
-    public class Test1
+    public class Test1 : MonoBehaviour
     {
 
     }

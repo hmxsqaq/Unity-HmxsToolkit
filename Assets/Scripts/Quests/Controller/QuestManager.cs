@@ -11,7 +11,7 @@ namespace Quests
     public class QuestManager : MonoBehaviour
     {
         [Header("Config")]
-        [SerializeField] private bool loadFormFile = true;
+        // [SerializeField] private bool loadFormFile = true;
         
         private readonly Dictionary<string, Quest> _questMap = new();
 
