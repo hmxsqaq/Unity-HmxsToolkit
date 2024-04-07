@@ -19,11 +19,5 @@ namespace Hmxs.Toolkit.Base.Singleton
                 return _instance;
             }
         }
-
-        protected virtual void Awake()
-        {
-            if (_instance == null)
-                _instance = (T)this;
-        }
     }
 }

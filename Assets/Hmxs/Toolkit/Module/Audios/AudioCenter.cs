@@ -36,10 +36,7 @@ namespace Hmxs.Toolkit.Module.Audios
             }
         }
 
-        protected override void Awake()
-        {
-            Init();
-        }
+        private void Awake() => Init();
 
         /// <summary>
         /// Init Path/MuteState/Volume Dict and BgSource
