@@ -1,48 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using Hmxs.Toolkit;
 using UnityEngine;
-using UnityEngine.Pool;
+using UnityEngine.SceneManagement;
 
 namespace Test
 {
     public class Test1 : MonoBehaviour
     {
-        private ObjectPool<GameObject> _pool;
-        private readonly List<GameObject> _list = new();
+        public string Name;
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _pool ??= new ObjectPool<GameObject>(CreateFunc, GetFunc, ReleaseFunc, DestroyFunc,
-                    defaultCapacity: 0, maxSize: 10);
-            }
-
             if (Input.GetKeyDown(KeyCode.A))
-            {
-                _list.Add(_pool.Get());
-            }
+                SceneManager.LoadScene(Name);
 
             if (Input.GetKeyDown(KeyCode.D))
             {
-                if (_list.Count > 0)
+                Timer.Register(5f, () =>
                 {
-                    _pool.Release(_list[0]);
-                    _list.Remove(_list[0]);
-                }
+                    Debug.Log("5s");
+                });
             }
         }
-
-        private GameObject CreateFunc()
-        {
-            var obj = new GameObject("PoolTest");
-            obj.transform.SetParent(transform);
-            return obj;
-        }
-
-        private void GetFunc(GameObject obj) => obj.SetActive(true);
-
-        private void ReleaseFunc(GameObject obj) => obj.SetActive(false);
-
-        private void DestroyFunc(GameObject obj) => Destroy(obj);
     }
 }

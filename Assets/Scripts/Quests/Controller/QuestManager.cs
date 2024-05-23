@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Hmxs.Toolkit.Module.Events;
+using Hmxs.Toolkit;
 using UnityEngine;
 
 namespace Quests
@@ -18,18 +18,18 @@ namespace Quests
         #region Events Subscribe
         private void OnEnable()
         {
-            Events.AddListener<string>(EventGroups.Quests.QuestStart, OnQuestStart);
-            Events.AddListener<string>(EventGroups.Quests.QuestAdvance, OnQuestAdvance);
-            Events.AddListener<string>(EventGroups.Quests.QuestFinish, OnQuestFinish);
-            Events.AddListener<string, int, QuestStepData>(EventGroups.Quests.QuestStepDataUpdate, OnStepDataUpdate);
+            // Events.AddListener<string>(EventGroups.Quests.QuestStart, OnQuestStart);
+            // Events.AddListener<string>(EventGroups.Quests.QuestAdvance, OnQuestAdvance);
+            // Events.AddListener<string>(EventGroups.Quests.QuestFinish, OnQuestFinish);
+            // Events.AddListener<string, int, QuestStepData>(EventGroups.Quests.QuestStepDataUpdate, OnStepDataUpdate);
         }
 
         private void OnDisable()
         {
-            Events.RemoveListener<string>(EventGroups.Quests.QuestStart, OnQuestStart);
-            Events.RemoveListener<string>(EventGroups.Quests.QuestAdvance, OnQuestAdvance);
-            Events.RemoveListener<string>(EventGroups.Quests.QuestFinish, OnQuestFinish);
-            Events.RemoveListener<string, int, QuestStepData>(EventGroups.Quests.QuestStepDataUpdate, OnStepDataUpdate);
+            // Events.RemoveListener<string>(EventGroups.Quests.QuestStart, OnQuestStart);
+            // Events.RemoveListener<string>(EventGroups.Quests.QuestAdvance, OnQuestAdvance);
+            // Events.RemoveListener<string>(EventGroups.Quests.QuestFinish, OnQuestFinish);
+            // Events.RemoveListener<string, int, QuestStepData>(EventGroups.Quests.QuestStepDataUpdate, OnStepDataUpdate);
         }
         #endregion
         
@@ -45,7 +45,7 @@ namespace Quests
             {
                 if (quest.State == QuestState.InProgress) 
                     quest.InstantiateCurrentStepPrefab(transform);
-                Events.Trigger(EventGroups.Quests.QuestStateChange, quest);
+                //Events.Trigger(EventGroups.Quests.QuestStateChange, quest);
             }
             // 开始运行时先检查一次
             CheckAllQuestsRequirements();
@@ -83,7 +83,7 @@ namespace Quests
         {
             var quest = GetQuestById(id);
             quest.State = state;
-            Events.Trigger(EventGroups.Quests.QuestStateChange, quest);
+            //Events.Trigger(EventGroups.Quests.QuestStateChange, quest);
         }
         
         /// <summary>

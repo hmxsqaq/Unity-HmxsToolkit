@@ -1,4 +1,4 @@
-﻿using Hmxs.Toolkit.Module.Events;
+﻿using Hmxs.Toolkit;
 using UnityEngine;
 
 namespace Quests
@@ -27,7 +27,7 @@ namespace Quests
         {
             if (_isFinished) return;
             _isFinished = true;
-            Events.Trigger(EventGroups.Quests.QuestAdvance, _questId);
+            //Events.Trigger(EventGroups.Quests.QuestAdvance, _questId);
             Destroy(gameObject);
         }
 

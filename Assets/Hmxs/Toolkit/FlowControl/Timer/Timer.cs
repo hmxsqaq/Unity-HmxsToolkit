@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-namespace Hmxs.Toolkit.Flow.Timer
+namespace Hmxs.Toolkit
 {
     /// <summary>
     /// 计时器，基于Update
@@ -88,21 +87,21 @@ namespace Hmxs.Toolkit.Flow.Timer
         private float? _timePassedBeforePause;                          // Nullable<float>，表示暂停之前此轮计时已经持续的时间，是否为空表示暂停状态
         private float? _timePassedBeforeRemove;                         // Nullable<float>，表示移除之前此轮计时已经持续的时间，是否为空表示移除状态
 
-        private static TimersManager _manager;
-
-        private static TimersManager Manager                    // 若TimerManager为空，尝试通过场景查找获取，若依然为空则创建一个TimerManager
-        {
-            get
-            {
-                if (_manager != null) return _manager;
-
-                _manager = Object.FindObjectOfType<TimersManager>();
-                if (_manager != null) return _manager;
-
-                _manager = new GameObject("TimerManager").AddComponent<TimersManager>();
-                return _manager;
-            }
-        }
+        // private static TimersManager _manager;
+        //
+        // private static TimersManager Manager                    // 若TimerManager为空，尝试通过场景查找获取，若依然为空则创建一个TimerManager
+        // {
+        //     get
+        //     {
+        //         if (_manager != null) return _manager;
+        //
+        //         _manager = Object.FindObjectOfType<TimersManager>();
+        //         if (_manager != null) return _manager;
+        //
+        //         _manager = new GameObject("TimerManager").AddComponent<TimersManager>();
+        //         return _manager;
+        //     }
+        // }
 
         #endregion
         
@@ -130,12 +129,12 @@ namespace Hmxs.Toolkit.Flow.Timer
             string timerID = "Default Timer")
         {
             var timer = new Timer(duration, onComplete, onUpdate, isLooped, useRealTime, owner,timerID);
-            if (Manager == null)
-            {
-                Debug.Log("Can not find TimerUpdater");
-                return null;
-            }
-            Manager.Add(timer);
+            // if (Manager == null)
+            // {
+            //     Debug.Log("Can not find TimerUpdater");
+            //     return null;
+            // }
+            TimerManager.Instance.Add(timer);
             return timer;
         }
         
@@ -143,7 +142,7 @@ namespace Hmxs.Toolkit.Flow.Timer
         /// 获得某一ID的全部计时器
         /// </summary>
         /// <param name="timerID">计时器ID</param>
-        public static List<Timer> GetById(string timerID) => Manager.Get(timerID);
+        public static List<Timer> GetById(string timerID) => TimerManager.Instance.Get(timerID);
         
         /// <summary>
         /// 暂停某一计时器(自动判空)
@@ -171,7 +170,7 @@ namespace Hmxs.Toolkit.Flow.Timer
         /// <summary>
         /// 清除所有计时器(自动判空)
         /// </summary>
-        public static void Clear() => Manager.ClearAll();
+        public static void Clear() => TimerManager.Instance.ClearAll();
 
         #endregion
         
@@ -275,7 +274,7 @@ namespace Hmxs.Toolkit.Flow.Timer
         #region Private Class
         
         // 计时器管理器，用于管理所有计时器
-        private class TimersManager : MonoBehaviour
+        internal class TimerManager : SingletonMono<TimerManager>
         {
             [SerializeField] [ReadOnly] private List<Timer> timers = new();
             [ReadOnly] private readonly List<Timer> _timersBuffer = new();

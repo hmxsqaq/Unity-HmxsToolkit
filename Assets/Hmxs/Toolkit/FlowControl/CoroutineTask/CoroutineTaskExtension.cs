@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace Hmxs.Toolkit.Flow.CoroutineTask
+namespace Hmxs.Toolkit
 {
     public static class CoroutineTaskExtension
     {
@@ -15,7 +15,7 @@ namespace Hmxs.Toolkit.Flow.CoroutineTask
         /// <returns>Task</returns>
         public static CoroutineTask StartAsTask(this IEnumerator enumerator, Action<bool> callback = null)
         {
-            var task = new Flow.CoroutineTask.CoroutineTask(enumerator);
+            var task = new CoroutineTask(enumerator);
             if (callback != null) task.OnComplete += callback;
             task.Start();
             return task;

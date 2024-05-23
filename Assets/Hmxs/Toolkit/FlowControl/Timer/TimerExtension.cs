@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Hmxs.Toolkit.Flow.Timer
+namespace Hmxs.Toolkit
 {
     public static class TimerExtension
     {

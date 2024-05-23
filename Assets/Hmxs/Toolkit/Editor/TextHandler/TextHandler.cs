@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Hmxs.Toolkit.Editor.TextHandler
+namespace Hmxs.Toolkit
 {
     public class TextHandler : OdinEditorWindow
     {

@@ -1,4 +1,4 @@
-﻿namespace Hmxs.Toolkit.Module.Audios
+﻿namespace Hmxs.Toolkit
 {
     public enum AudioType
     {

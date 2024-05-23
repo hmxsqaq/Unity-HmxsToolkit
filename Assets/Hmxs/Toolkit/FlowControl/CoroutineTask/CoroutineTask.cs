@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections;
-using Hmxs.Toolkit.Base.Singleton;
 
-namespace Hmxs.Toolkit.Flow.CoroutineTask
+namespace Hmxs.Toolkit
 {
     /// <summary>
     /// 协程控制器

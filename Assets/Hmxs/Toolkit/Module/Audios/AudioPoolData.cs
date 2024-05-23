@@ -1,8 +1,7 @@
 ﻿using System;
 using UnityEngine;
-using AudioType = Hmxs.Toolkit.Module.Audios.AudioType;
 
-namespace Hmxs.Toolkit.Module.Audios
+namespace Hmxs.Toolkit
 {
     [Serializable]
     public class AudioPoolData

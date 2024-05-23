@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Hmxs.Toolkit.Module.Audios
+namespace Hmxs.Toolkit
 {
     public class AudioAsset
     {

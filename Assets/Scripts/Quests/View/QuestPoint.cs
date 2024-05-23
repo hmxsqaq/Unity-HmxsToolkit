@@ -1,4 +1,4 @@
-﻿using Hmxs.Toolkit.Module.Events;
+﻿using Hmxs.Toolkit;
 using UnityEngine;
 
 namespace Quests
@@ -29,14 +29,14 @@ namespace Quests
 
         private void OnEnable()
         {
-            Events.AddListener<Quest>(EventGroups.Quests.QuestStateChange, OnQuestStateChange);
-            Events.AddListener(EventGroups.Player.SubmitPressed, OnSubmitPressed);
+            // Events.AddListener<Quest>(EventGroups.Quests.QuestStateChange, OnQuestStateChange);
+            // Events.AddListener(EventGroups.Player.SubmitPressed, OnSubmitPressed);
         }
 
         private void OnDisable()
         {
-            Events.RemoveListener<Quest>(EventGroups.Quests.QuestStateChange, OnQuestStateChange);
-            Events.RemoveListener(EventGroups.Player.SubmitPressed, OnSubmitPressed);
+            // Events.RemoveListener<Quest>(EventGroups.Quests.QuestStateChange, OnQuestStateChange);
+            // Events.RemoveListener(EventGroups.Player.SubmitPressed, OnSubmitPressed);
         }
         
         /// <summary>
@@ -61,12 +61,12 @@ namespace Quests
             switch (_currentState)
             {
                 case QuestState.CanStart:
-                    if (isStartPoint) 
-                        Events.Trigger<string>(EventGroups.Quests.QuestStart, _questId);
+                    //if (isStartPoint)
+                        //Events.Trigger<string>(EventGroups.Quests.QuestStart, _questId);
                     break;
                 case QuestState.CanFinish:
-                    if (isFinishPoint) 
-                        Events.Trigger<string>(EventGroups.Quests.QuestFinish, _questId);
+                    //if (isFinishPoint)
+                        //Events.Trigger<string>(EventGroups.Quests.QuestFinish, _questId);
                     break;
             }
         }

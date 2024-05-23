@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Hmxs.Toolkit.Base.Singleton;
+using Hmxs.Toolkit;
 using UnityEngine;
-using AudioType = Hmxs.Toolkit.Module.Audios.AudioType;
 
 namespace Hmxs.Toolkit.Module.Audios
 {
