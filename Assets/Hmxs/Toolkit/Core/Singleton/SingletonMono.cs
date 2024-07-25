@@ -5,31 +5,29 @@ using Object = UnityEngine.Object;
 namespace Hmxs.Toolkit
 {
     /// <summary>
-    /// 泛型单例基类-继承Mono
-    /// 采用Lazy进行实例化保证线程安全
+    /// generic singleton base class - inherit from MonoBehaviour
     /// </summary>
     public abstract class SingletonMono<T> : MonoBehaviour where T : SingletonMono<T>
     {
-        private static T _instance;
+        private static readonly Lazy<T> InstanceHolder = new(() => {
+            var instance = FindObjectOfType<T>();
+            if (instance != null) return instance;
+            var singletonObject = new GameObject(typeof(T).Name + "_Singleton");
+            instance = singletonObject.AddComponent<T>();
+            instance.OnInstanceInit(instance);
+            return instance;
+        });
 
-        public static T Instance
-        {
-            get
-            {
-                if (_instance != null) return _instance;
-
-                _instance = FindObjectOfType<T>();
-                if (_instance != null) return _instance;
-
-                _instance = new Lazy<GameObject>(new GameObject(typeof(T).Name)).Value.AddComponent<T>();
-                _instance.OnInstanceCreate(_instance);
-                return _instance;
-            }
-        }
+        public static T Instance => InstanceHolder.Value;
 
         /// <summary>
-        /// 单例被第一次调用后调用该方法
+        /// called when instance is initialized
         /// </summary>
-        protected virtual void OnInstanceCreate(T instance) {}
+        protected virtual void OnInstanceInit(T instance) => DontDestroyOnLoad(gameObject);
+
+        private void Awake()
+        {
+            if (InstanceHolder.IsValueCreated && InstanceHolder.Value != this) Destroy(gameObject);
+        }
     }
 }

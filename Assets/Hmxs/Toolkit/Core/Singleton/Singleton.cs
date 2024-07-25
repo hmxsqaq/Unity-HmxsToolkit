@@ -3,28 +3,24 @@
 namespace Hmxs.Toolkit
 {
     /// <summary>
-    /// 泛型单例基类
-    /// 采用Lazy进行实例化保证线程安全
+    /// generic singleton base class
     /// </summary>
     public abstract class Singleton<T> where T : Singleton<T>, new()
     {
-        private static T _instance;
-
-        public static T Instance
+        private static readonly Lazy<T> InstanceHolder = new(() =>
         {
-            get
-            {
-                if (_instance != null) return _instance;
+            var instance = new T();
+            instance.OnInstanceInit(instance);
+            return instance;
+        });
 
-                _instance = new Lazy<T>(true).Value;
-                _instance.OnInstanceCreate(_instance);
-                return _instance;
-            }
-        }
-        
+        public static T Instance => InstanceHolder.Value;
+
         /// <summary>
-        /// 单例被第一次调用后调用该方法
+        /// called when instance is initialized
         /// </summary>
-        protected virtual void OnInstanceCreate(T instance) {}
+        protected virtual void OnInstanceInit(T instance) {}
+
+        private Singleton() { }
     }
 }
