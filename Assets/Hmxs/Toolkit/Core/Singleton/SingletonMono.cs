@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Hmxs.Toolkit
 {
@@ -25,7 +24,7 @@ namespace Hmxs.Toolkit
         /// </summary>
         protected virtual void OnInstanceInit(T instance) => DontDestroyOnLoad(gameObject);
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (InstanceHolder.IsValueCreated && InstanceHolder.Value != this) Destroy(gameObject);
         }
