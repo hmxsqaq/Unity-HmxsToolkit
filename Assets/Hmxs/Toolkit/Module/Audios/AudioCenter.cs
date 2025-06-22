@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Hmxs.Toolkit;
 using UnityEngine;
 
 namespace Hmxs.Toolkit.Module.Audios
@@ -35,7 +34,11 @@ namespace Hmxs.Toolkit.Module.Audios
             }
         }
 
-        private void Awake() => Init();
+        protected override void Awake()
+        {
+            base.Awake();
+            Init();
+        }
 
         /// <summary>
         /// Init Path/MuteState/Volume Dict and BgSource
