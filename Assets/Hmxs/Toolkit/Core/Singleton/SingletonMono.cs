@@ -43,24 +43,22 @@ namespace Hmxs.Toolkit
 
 		protected virtual void Awake()
 		{
-			lock (LockObj)
+			if (!_instance)
 			{
-				if (!_instance)
-				{
-					_instance = this as T;
-					if (KeepAliveAcrossScenes) DontDestroyOnLoad(gameObject);
-				}
-				else if (_instance != this)
-				{
-					Debug.LogWarning($"[{typeof(T)}] Duplicate instance detected. Destroying {name}.");
-					DestroyImmediate(gameObject);
-				}
+				_instance = this as T;
+				if (KeepAliveAcrossScenes) DontDestroyOnLoad(gameObject);
+			}
+			else if (_instance != this)
+			{
+				Debug.LogWarning($"[{typeof(T)}] Duplicate instance detected. Destroying {name}.");
+				Destroy(gameObject);
+				return;
 			}
 		}
 
 		protected virtual void OnDestroy()
 		{
-			lock (LockObj) if (_instance == this) _instance = null;
+			if (_instance == this) _instance = null;
 		}
 
 		protected virtual void OnApplicationQuit() => _isApplicationQuitting = true;
